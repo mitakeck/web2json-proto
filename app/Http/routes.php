@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/v1', function() {
+  return view('template/index');
+});
+
