@@ -15,6 +15,7 @@ $(function() {
   var iframe = $("#viewport")[0];
   var iframeHeight = $(window).innerHeight() - $(".container").height();
   $(iframe).css("height", iframeHeight+"px");
+  $(iframe.contentDocument.documentElement).html("<p>Loading...</p>");
   $.get(url, function(data){
     if (data.responseText === "") {
       alert("no content");
