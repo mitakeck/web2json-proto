@@ -48,17 +48,7 @@ $(function() {
         console.log("replate : " + $(this).attr("href"));
       }
     });
-    // var $content = $(data.responseText);
-    // $content.each(function(index, element) {
-    //   var path = $(this).attr("href");
-    //   if (path && path.match(relativePath)) {
-    //     $(this).attr("href", domain + path);
-    //   }
-    //   var path = $(this).attr("src");
-    //   if (path && path.match(relativePath)) {
-    //     $(this).attr("src", domain + path);
-    //   }
-    // });
+
     $(iframe.contentDocument.documentElement).html($content);
 
     setTimeout(function() {
