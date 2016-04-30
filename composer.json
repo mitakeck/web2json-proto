@@ -36,6 +36,7 @@
             "php artisan key:generate"
         ],
         "post-install-cmd": [
+            "gulp"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
