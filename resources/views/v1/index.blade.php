@@ -176,7 +176,9 @@
           alert("no content");
           return;
         }
-        var $content = $(data.responseText);
+        var el = document.createElement( 'html' );
+        el.innerHTML = data.responseText;
+        var $content = $(el);
         $("img", $content).each(function() {
           var path = $(this).attr("src");
           // console.log(path);
