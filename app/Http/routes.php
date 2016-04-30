@@ -19,3 +19,7 @@ Route::get('/v1', function() {
   return view('template/index');
 });
 
+Route::post('/v1', function() {
+  $url = Request::input('url');
+  return view('v1/index', ['content' => $url]);
+});
