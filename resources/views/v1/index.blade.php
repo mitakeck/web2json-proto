@@ -153,64 +153,6 @@
     <iframe id="viewport" data-url="<?php echo $content; ?>" height="100%" width="100%"></iframe>
 
     <script src="js/app.js"></script>
-    <script type="text/javascript">
-    $(function() {
-
-      $(".menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-      });
-
-      var url = $("#viewport").attr("data-url");
-      var domain = url.match(/^https?:\/\/[^/]+/) + "/";
-      console.log(url)
-      // var relativePath = /([^/][^\":]+)/;
-      var relativePath = /^\/?[^\/].*/;
-      var iframe = $("#viewport")[0];
-      var iframeHeight = $(window).innerHeight() - $(".container").height();
-      $(iframe).css("height", iframeHeight+"px");
-      $.get(url, function(data){
-        if (data.responseText === "") {
-          alert("no content");
-          return;
-        }
-        var $content = $(data.responseText);
-        $("img", $content).each(function() {
-          var path = $(this).attr("src");
-          console.log(path);
-          if (path && path.match(relativePath)) {
-            $(this).attr("src", domain + path);
-            console.log("replate : " + $(this).attr("src"));
-          }
-        });
-        $("link", $content).each(function() {
-          var path = $(this).attr("href");
-          console.log(path);
-          if (path && path.match(relativePath)) {
-            $(this).attr("href", domain + path);
-            console.log("replate : " + $(this).attr("href"));
-          }
-        });
-        // var $content = $(data.responseText);
-        // $content.each(function(index, element) {
-        //   var path = $(this).attr("href");
-        //   if (path && path.match(relativePath)) {
-        //     $(this).attr("href", domain + path);
-        //   }
-        //   var path = $(this).attr("src");
-        //   if (path && path.match(relativePath)) {
-        //     $(this).attr("src", domain + path);
-        //   }
-        // });
-        $(iframe.contentDocument.documentElement).html($content);
-
-        setTimeout(function() {
-          $("#wrapper").toggleClass("toggled");
-        }, 300);
-      });
-    });
-    </script>
-
-    </script>
+    <script src="js/scrape.js"></script>
   </body>
 </html>
