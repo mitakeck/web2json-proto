@@ -63,7 +63,19 @@ $(function() {
           break;
       }
     });
+
     $(iframe.contentDocument.documentElement).html($content);
+
+    var $column = $("#column");
+    var $selecter = $("#selecter");
+    $("*", $content).click(function(event) {
+      console.log(event);
+      console.log($(this).text());
+      $column.val($(this).text());
+      $selecter.val($(this).prop("tagName") + "." + $(this).prop("class").split(" ").join("."));
+      return false;
+    });
+
     setTimeout(function() {
       $("#wrapper").toggleClass("toggled");
     }, 300);
