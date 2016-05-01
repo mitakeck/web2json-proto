@@ -23,7 +23,6 @@
         -o-transition: all 0.5s ease;
         transition: all 0.5s ease;
     }
-
     #wrapper.toggled {
         padding-right: 250px;
     }
@@ -104,6 +103,7 @@
         color: #fff;
         background: none;
     }
+
     </style>
   </head>
   <body>
@@ -117,25 +117,11 @@
                   </a>
               </li>
               <li>
-                  <a href="#">Dashboard</a>
-              </li>
-              <li>
-                  <a href="#">Shortcuts</a>
-              </li>
-              <li>
-                  <a href="#">Overview</a>
-              </li>
-              <li>
-                  <a href="#">Events</a>
-              </li>
-              <li>
-                  <a href="#">About</a>
-              </li>
-              <li>
-                  <a href="#">Services</a>
-              </li>
-              <li>
-                  <a href="#">Contact</a>
+                <div class="form-group">
+                  <input type="text" class="form-control" id="column" placeholder="カラム名">
+                  <input type="text" class="form-control" id="selecter" placeholder="CSS セレクタ">
+                  <input type="submit" class="form-control" value="保存">
+                </div>
               </li>
           </ul>
       </div>
