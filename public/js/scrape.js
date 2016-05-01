@@ -12,8 +12,14 @@ $(function() {
   var isStartWithSlash = /^\/.*/;
 
   var iframe = $("#viewport")[0];
-  var iframeHeight = $(window).innerHeight() - $(".container").height();
-  $(iframe).css("height", iframeHeight+"px");
+  var adjustIframeHeight = function() {
+    var iframeHeight = $(window).innerHeight() - $(".container").height();
+    $(iframe).css("height", iframeHeight+"px");
+  };
+  $(window).on("load resize", function() {
+    adjustIframeHeight();
+  });
+  adjustIframeHeight();
 
   var replaceRelativePath = function(path) {
     var join = function(prefix, path) {
