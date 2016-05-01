@@ -5,21 +5,34 @@ $(function() {
     $("#wrapper").toggleClass("toggled");
   });
 
-  var url = $("#viewport").attr("data-url");
+  var url = $("#viewport").attr("data-url").replace(/\/$/, "");
   var domain = url.match(/^https?:\/\/[^/]+/);
-  var relativePath = /^\/?[^\/].*/;
-  var isAbsPath = /^https?.*|^\/\/.*|^data:image\/.*/;
+  var isAbsPath = /^https?.*|^\/\/.*|^data:image\/.*/gi;
+  var isRelativePath = /^\.\/.*/gi;
+  var isStartWithSlash = /^\/.*/;
+
   var iframe = $("#viewport")[0];
   var iframeHeight = $(window).innerHeight() - $(".container").height();
   $(iframe).css("height", iframeHeight+"px");
 
-  var replaceReadingPath = function(domain, path) {
-    var isStartWithSlash = /^\/.*/;
-    if (path.match(isStartWithSlash)) {
-      return domain + path;
-    }else{
-      return domain + "/" + path;
+  var replaceRelativePath = function(path) {
+    var join = function(prefix, path) {
+      if (path.match(isStartWithSlash)) {
+        return prefix + path;
+      }else{
+        return prefix + "/" + path;
+      }
+    };
+    if (path){
+      if (path.match(isAbsPath)) {
+        return path;
+      }else if (path.match(isRelativePath)) {
+        return join(domain, path);
+      }else{
+        return join(url, path);
+      }
     }
+    return "#";
   };
 
   $(iframe.contentDocument.documentElement).html("<p>Loading...</p>");
@@ -29,25 +42,22 @@ $(function() {
       alert("no content");
       return;
     }
-
     var $content = $(data.responseText);
-
-    $("img", $content).each(function() {
-      var path = $(this).attr("src");
-      // console.log(path);
-      if (path && !path.match(isAbsPath)) {
-        $(this).attr("src", replaceReadingPath(domain, path));
+    $content.each(function(index, element) {
+      switch ($(this).prop("tagName")) {
+        case "LINK":
+          $(this).attr("href", replaceRelativePath($(this).attr("href")));
+          break;
+        case "IMG":
+          console.log("img");
+          $(this).attr("src", replaceRelativePath($(this).attr("src")));
+          break;
+        default:
+          // nothing.
+          break;
       }
     });
-    $("link", $content).each(function() {
-      var path = $(this).attr("href");
-      if (path && !path.match(isAbsPath)) {
-        $(this).attr("href", replaceReadingPath(domain, path));
-      }
-    });
-
     $(iframe.contentDocument.documentElement).html($content);
-
     setTimeout(function() {
       $("#wrapper").toggleClass("toggled");
     }, 300);
