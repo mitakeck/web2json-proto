@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use App\MongoDoc\User;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,4 +23,13 @@ Route::get('/v1', function() {
 Route::post('/v1', function() {
   $url = Request::input('url');
   return view('v1/index', ['content' => $url]);
+});
+
+Route::get("/phpinfo", function() {
+	phpinfo();
+});
+
+Route::get("/user", function() {
+	$users = User::all();
+	dd($users);
 });
