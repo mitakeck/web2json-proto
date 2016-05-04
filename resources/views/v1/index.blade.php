@@ -121,6 +121,7 @@
                   <input type="text" class="form-control" id="column" placeholder="カラム名">
                   <input type="text" class="form-control" id="selecter" placeholder="CSS セレクタ">
                   <input type="submit" class="form-control" value="保存">
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 </div>
               </li>
           </ul>
