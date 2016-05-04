@@ -1,7 +1,7 @@
 <?php
 
-use Zizaco\MongolidLaravel;
+namespace App\MongoDoc;
 
-class User extends MongoLid {
-	protected $collection = 'users';
-}
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+
+class User extends Eloquent {}
