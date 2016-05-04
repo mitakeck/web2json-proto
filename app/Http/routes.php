@@ -23,3 +23,12 @@ Route::post('/v1', function() {
   $url = Request::input('url');
   return view('v1/index', ['content' => $url]);
 });
+
+Route::get("/phpinfo", function() {
+	phpinfo();
+});
+
+Route::get("/user", function() {
+	$users = User::all();
+	dd($users);
+});
